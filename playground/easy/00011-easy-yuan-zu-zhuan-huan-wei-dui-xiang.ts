@@ -2,16 +2,11 @@
   11 - 元组转换为对象
   -------
   by sinoon (@sinoon) #简单 #object-keys
-
   ### 题目
-
   将一个元组类型转换为对象类型，这个对象类型的键/值和元组中的元素对应。
-
   例如：
-
   ```ts
   const tuple = ['tesla', 'model 3', 'model X', 'model Y'] as const
-
   type result = TupleToObject<typeof tuple> // expected { tesla: 'tesla', 'model 3': 'model 3', 'model X': 'model X', 'model Y': 'model Y'}
   ```
 
@@ -19,8 +14,10 @@
 */
 
 /* _____________ 你的代码 _____________ */
-
-type TupleToObject<T extends readonly any[]> = any
+// 使用了映射类型来遍历元组类型 T 的每个元素，并将其作为键和值添加到对象类型中。
+type TupleToObject<T extends readonly any[]> = {
+  [K in T[number]]: K
+}
 
 /* _____________ 测试用例 _____________ */
 import type { Equal, Expect } from '@type-challenges/utils'
